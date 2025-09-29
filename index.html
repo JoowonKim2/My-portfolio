@@ -1,26 +1,68 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="style.css" />
-    <title>
-      할일 목록
-    </title>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      #canvas {
+        width: 100vw;
+        height: 100vh;
+        display: block;
+      }
+    </style>
   </head>
   <body>
-    <div class="container">
-      <div class="input-container">
-        <input id="input" placeholder="예) 코딩공부하기" />
-        <button id="add-button" >추가</button>
-      </div>
-      <div class="list-container">
-        <h1>할 일 목록</h1>
-        <ul id="list">
-          <li class="list-item">html 꾸미기</li>
-        </ul>
-      </div>
-    </div>
+    <canvas id="canvas"></canvas>
+  
+    <script type="importmap">
+      {
+      "imports": {
+        "three": "https://unpkg.com/three@0.141.0/build/three.module.js",
+        "GLTFLoader": "https://unpkg.com/three@0.141.0/examples/jsm/loaders/GLTFLoader.js"
+      }
+    }
+    </script>
+
+    <script type="module">
+
+      import * as THREE from "three";
+      import { GLTFLoader } from "GLTFLoader";
+
+      let scene = new THREE.Scene();
+      let renderer = new THREE.WebGLRenderer({
+        canvas : document.querySelector('#canvas'),
+        antialias : true
+      });
+      renderer.outputEncoding = THREE.sRGBEncoding;
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      
+      let camera = new THREE.PerspectiveCamera(30, 1);
+      camera.position.set(0, 1, 5);
+
+      scene.background = new THREE.Color(0xaaaaaa);
+
+      let light = new THREE.DirectionalLight(0xffffff, 1);
+      scene.add(light);
+
+      let loader = new GLTFLoader();
+      loader.load('./oiiaioooooiai_cat/scene.gltf', function(gltf){
+        scene.add(gltf.scene);
+        renderer.render(scene, camera);
+        function animate(){
+          requestAnimationFrame(animate);
+          gltf.scene.rotation.y += 0.01;
+          renderer.render(scene, camera);
+        }
+        animate();
+      });
+
+
+    </script>
+
   </body>
-  <script src="app.js"></script>
 </html>
