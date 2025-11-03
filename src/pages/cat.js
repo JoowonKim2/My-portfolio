@@ -51,7 +51,7 @@ function Cat() {
     loader.load('./models/oiiaioooooiai_cat/scene.gltf', (gltf) => {
       const model = gltf.scene;
       model.scale.set(1.8, 1.8, 1.8);
-      model.position.set(0, 0, 0);
+      model.position.set(0, 1, 0);
 
       model.traverse((child) => {
         if (child.isMesh) {
