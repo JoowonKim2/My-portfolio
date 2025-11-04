@@ -12,6 +12,7 @@ function Home() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        gap: '40px',
       }}
     >
       <button
@@ -24,6 +25,18 @@ function Home() {
         }}
       >
         cat
+      </button>
+
+      <button
+        onClick={() => navigate('/car')}
+        style={{
+          padding: '20px 60px',
+          fontSize: '24px',
+          borderRadius: '12px',
+          cursor: 'pointer',
+        }}
+      >
+        car
       </button>
     </div>
   );
