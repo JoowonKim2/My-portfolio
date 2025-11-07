@@ -17,8 +17,7 @@ function Cat() {
     document.addEventListener('mousemove', handleMouseMove);
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xdddddd);
-
+    scene.background = new THREE.Color(0xCBCBCB);
     const renderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current,
       antialias: true,
@@ -26,14 +25,10 @@ function Cat() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
 
-    const camera = new THREE.PerspectiveCamera(
-      35,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
+    const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 1.5, 6);
 
+    // 조명
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
     scene.add(ambientLight);
 
@@ -50,7 +45,7 @@ function Cat() {
     scene.add(spotLight);
 
     const loader = new GLTFLoader();
-    loader.load('./models/bumper_car/scene.gltf', (gltf) => {
+    loader.load('./models/oiiaioooooiai_cat/scene.gltf', (gltf) => {
       const model = gltf.scene;
       model.scale.set(1.8, 1.8, 1.8);
       model.position.set(0, 1, 0);
@@ -65,12 +60,13 @@ function Cat() {
 
       scene.add(model);
 
-      function animate() {
+      // 마우스 움직임 기반 회전
+      const animate = () => {
         requestAnimationFrame(animate);
         model.rotation.y += (mouseX.current * Math.PI * 2 - model.rotation.y) * 0.05;
         model.rotation.x += (mouseY.current * Math.PI - model.rotation.x) * 0.05;
         renderer.render(scene, camera);
-      }
+      };
       animate();
     });
 
