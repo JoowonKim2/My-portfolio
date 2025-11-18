@@ -3,6 +3,9 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useNavigate } from 'react-router-dom';
 
+import LikeButton from '../pages/LikeButton';
+
+
 function Cat() {
   const canvasRef = useRef(null);
   const mouseX = useRef(0);
@@ -117,6 +120,9 @@ function Cat() {
       >
         Back
       </button>
+
+      <LikeButton pageName="cat" />
+      
     </>
   );
 }
