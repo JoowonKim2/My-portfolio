@@ -1,3 +1,4 @@
+// LikeButton.jsx
 import { useState, useEffect } from 'react'
 import { supabase } from '../supabaseClient'
 
@@ -8,25 +9,25 @@ function LikeButton({ pageName }) {
 
   // 페이지 로드시 좋아요 수 가져오기
   useEffect(() => {
-    fetchLikes()
-  }, [pageName])
+    async function fetchLikes() {
+      try {
+        const { data, error } = await supabase
+          .from('pages')
+          .select('likes')
+          .eq('page_name', pageName)
+          .single()
 
-  async function fetchLikes() {
-    try {
-      const { data, error } = await supabase
-        .from('pages')
-        .select('likes')
-        .eq('page_name', pageName)
-        .single()
-
-      if (error) throw error
-      setLikes(data.likes)
-    } catch (error) {
-      console.error('Error fetching likes:', error)
-    } finally {
-      setIsLoading(false)
+        if (error) throw error
+        setLikes(data.likes)
+      } catch (error) {
+        console.error('Error fetching likes:', error)
+      } finally {
+        setIsLoading(false)
+      }
     }
-  }
+
+    fetchLikes()
+  }, [pageName]) // pageName 변경 시 자동 호출
 
   // 좋아요 버튼 클릭
   async function handleLike() {
