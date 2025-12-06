@@ -200,7 +200,7 @@ function Shiba() {
         letterSpacing: '-0.5px',
         zIndex: 9999,
       }}>
-        3D Cat Model
+        3D Dog Model
       </div>
 
       {/* 인터랙션 가이드 */}
